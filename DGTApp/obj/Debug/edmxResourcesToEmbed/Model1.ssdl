@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Conductores" EntityType="Model1.Store.Conductores" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Vehiculos" EntityType="Model1.Store.Vehiculos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TiposInfraccion" EntityType="Model1.Store.TiposInfraccion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Infracciones" EntityType="Model1.Store.Infracciones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConductorVehiculo" EntityType="Model1.Store.ConductorVehiculo" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ConductorVehiculo_Conductor" Association="Model1.Store.FK_ConductorVehiculo_Conductor">
+      <End Role="Conductor" EntitySet="Conductores" />
+      <End Role="ConductorVehiculo" EntitySet="ConductorVehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConductorVehiculo_Vehiculo" Association="Model1.Store.FK_ConductorVehiculo_Vehiculo">
+      <End Role="Vehiculo" EntitySet="Vehiculos" />
+      <End Role="ConductorVehiculo" EntitySet="ConductorVehiculo" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Conductores">
+    <Key>
+      <PropertyRef Name="Dni" />
+    </Key>
+    <Property Name="Dni" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellidos" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Puntos" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vehiculos">
+    <Key>
+      <PropertyRef Name="Matricula" />
+    </Key>
+    <Property Name="Matricula" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Marca" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Modelo" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TiposInfraccion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Puntos" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Infracciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dni" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tipo" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConductorVehiculo">
+    <Key>
+      <PropertyRef Name="Conductor_Dni" />
+      <PropertyRef Name="Vehiculo_Matricula" />
+    </Key>
+    <Property Name="Conductor_Dni" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Vehiculo_Matricula" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ConductorVehiculo_Conductor">
+    <End Role="Conductor" Type="Model1.Store.Conductores" Multiplicity="1" />
+    <End Role="ConductorVehiculo" Type="Model1.Store.ConductorVehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conductor">
+        <PropertyRef Name="Dni" />
+      </Principal>
+      <Dependent Role="ConductorVehiculo">
+        <PropertyRef Name="Conductor_Dni" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConductorVehiculo_Vehiculo">
+    <End Role="ConductorVehiculo" Type="Model1.Store.ConductorVehiculo" Multiplicity="*" />
+    <End Role="Vehiculo" Type="Model1.Store.Vehiculos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Vehiculo">
+        <PropertyRef Name="Matricula" />
+      </Principal>
+      <Dependent Role="ConductorVehiculo">
+        <PropertyRef Name="Vehiculo_Matricula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Conductores" EntityType="Model1.Conductor" />
+    <EntitySet Name="Vehiculos" EntityType="Model1.Vehiculo" />
+    <EntitySet Name="TiposInfraccion" EntityType="Model1.TipoInfraccion" />
+    <EntitySet Name="Infracciones" EntityType="Model1.Infraccion" />
+    <AssociationSet Name="ConductorVehiculo" Association="Model1.ConductorVehiculo">
+      <End Role="Conductor" EntitySet="Conductores" />
+      <End Role="Vehiculo" EntitySet="Vehiculos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Conductor">
+    <Key>
+      <PropertyRef Name="Dni" />
+    </Key>
+    <Property Name="Dni" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Nombre" Type="String" Nullable="false" />
+    <Property Name="Apellidos" Type="String" Nullable="false" />
+    <Property Name="Puntos" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Vehiculo" Relationship="Model1.ConductorVehiculo" FromRole="Conductor" ToRole="Vehiculo" />
+  </EntityType>
+  <EntityType Name="Vehiculo">
+    <Key>
+      <PropertyRef Name="Matricula" />
+    </Key>
+    <Property Name="Matricula" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Marca" Type="String" Nullable="false" />
+    <Property Name="Modelo" Type="String" Nullable="false" />
+    <NavigationProperty Name="Conductor" Relationship="Model1.ConductorVehiculo" FromRole="Vehiculo" ToRole="Conductor" />
+  </EntityType>
+  <EntityType Name="TipoInfraccion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" />
+    <Property Name="Puntos" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Infraccion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dni" Type="String" Nullable="false" />
+    <Property Name="Tipo" Type="Int32" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <Association Name="ConductorVehiculo">
+    <End Type="Model1.Conductor" Role="Conductor" Multiplicity="*" />
+    <End Type="Model1.Vehiculo" Role="Vehiculo" Multiplicity="*" />
+  </Association>
+</Schema>
