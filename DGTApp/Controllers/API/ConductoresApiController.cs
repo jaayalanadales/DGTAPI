@@ -9,26 +9,36 @@ using System.Web.Http;
 
 namespace DGTApp.Controllers.API
 {
-    [Route("api/ConductoresAPI/{action}", Name = "ConductoresAPI")]
+    [Route("conductores")]
     public class ConductoresApiController : ApiController
     {
-        [HttpGet]
 
-        public IHttpActionResult Get()
+        [HttpGet]
+        [Route("conductores/{dni}/puntos")]
+        public IHttpActionResult GetPuntosConductor(string dni)
         {
             using (Model1Container context = new Model1Container())
             {
-                List<Conductor> conductores = context.Conductores.ToList();
+                Conductor conductor = context.Conductores.Find(dni);
+                int puntosConductor = conductor.Puntos;
 
-                return Json(conductores, new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented,
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    
-                });
+                return Ok("El conductor " + dni + " tiene " + puntosConductor + " puntos.");
             }
+        }
 
+        [HttpGet]
+        [Route("conductores/{dni}/infracciones")]
+        public IHttpActionResult GetInfraccionesConductor(string dni)
+        {
+            Model1Container context = new Model1Container();
+            List<Infraccion> infraccionesConductor = context.Conductores.Find(dni).Infraccion.ToList();
+                
+            return Json(infraccionesConductor, new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 
+            });
         }
 
         [HttpPost]

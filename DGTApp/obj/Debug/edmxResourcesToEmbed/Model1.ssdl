@@ -14,6 +14,10 @@
       <End Role="Vehiculo" EntitySet="Vehiculos" />
       <End Role="ConductorVehiculo" EntitySet="ConductorVehiculo" />
     </AssociationSet>
+    <AssociationSet Name="ConductorInfraccion" Association="Model1.Store.ConductorInfraccion">
+      <End Role="Conductor" EntitySet="Conductores" />
+      <End Role="Infraccion" EntitySet="Infracciones" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Conductores">
     <Key>
@@ -45,9 +49,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Dni" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Tipo" Type="int" Nullable="false" />
     <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="ConductorDni" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ConductorVehiculo">
     <Key>
@@ -57,6 +61,18 @@
     <Property Name="Conductor_Dni" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Vehiculo_Matricula" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <Association Name="ConductorInfraccion">
+    <End Role="Conductor" Type="Model1.Store.Conductores" Multiplicity="1" />
+    <End Role="Infraccion" Type="Model1.Store.Infracciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conductor">
+        <PropertyRef Name="Dni" />
+      </Principal>
+      <Dependent Role="Infraccion">
+        <PropertyRef Name="ConductorDni" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ConductorVehiculo_Conductor">
     <End Role="Conductor" Type="Model1.Store.Conductores" Multiplicity="1" />
     <End Role="ConductorVehiculo" Type="Model1.Store.ConductorVehiculo" Multiplicity="*" />

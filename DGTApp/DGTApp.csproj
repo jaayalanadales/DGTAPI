@@ -194,7 +194,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\API\ConductoresApiController.cs" />
+    <Compile Include="Controllers\API\ConductoresVehiculosApiController.cs" />
     <Compile Include="Controllers\API\InfraccionesApiController.cs" />
+    <Compile Include="Controllers\API\TiposInfraccionesApiController.cs" />
     <Compile Include="Controllers\API\VehiculosApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

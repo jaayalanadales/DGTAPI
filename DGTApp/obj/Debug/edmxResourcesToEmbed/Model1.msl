@@ -33,9 +33,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model1.Infraccion)">
         <MappingFragment StoreEntitySet="Infracciones">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Dni" ColumnName="Dni" />
           <ScalarProperty Name="Tipo" ColumnName="Tipo" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="ConductorDni" ColumnName="ConductorDni" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

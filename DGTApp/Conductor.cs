@@ -19,6 +19,7 @@ namespace DGTApp
         public Conductor()
         {
             this.Vehiculo = new HashSet<Vehiculo>();
+            this.Infraccion = new HashSet<Infraccion>();
         }
     
         public string Dni { get; set; }
@@ -27,8 +28,10 @@ namespace DGTApp
         public int Puntos { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
         [JsonIgnore]
         public virtual ICollection<Vehiculo> Vehiculo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<Infraccion> Infraccion { get; set; }
     }
 }

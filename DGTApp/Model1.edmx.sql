@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/14/2021 23:41:13
--- Generated from EDMX file: C:\Users\josan\source\repos\DGTApp\DGTApp\Model1.edmx
+-- Date Created: 01/15/2021 17:34:53
+-- Generated from EDMX file: C:\Users\isa_b\Documents\DGTAPI\DGTApp\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -76,9 +76,9 @@ GO
 -- Creating table 'Infracciones'
 CREATE TABLE [dbo].[Infracciones] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Dni] nvarchar(max)  NOT NULL,
     [Tipo] int  NOT NULL,
-    [Fecha] datetime  NOT NULL
+    [Fecha] datetime2  NOT NULL,
+    [ConductorDni] nvarchar(50)  NOT NULL
 );
 GO
 
@@ -149,6 +149,21 @@ GO
 CREATE INDEX [IX_FK_ConductorVehiculo_Vehiculo]
 ON [dbo].[ConductorVehiculo]
     ([Vehiculo_Matricula]);
+GO
+
+-- Creating foreign key on [ConductorDni] in table 'Infracciones'
+ALTER TABLE [dbo].[Infracciones]
+ADD CONSTRAINT [FK_ConductorInfraccion]
+    FOREIGN KEY ([ConductorDni])
+    REFERENCES [dbo].[Conductores]
+        ([Dni])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ConductorInfraccion'
+CREATE INDEX [IX_FK_ConductorInfraccion]
+ON [dbo].[Infracciones]
+    ([ConductorDni]);
 GO
 
 -- --------------------------------------------------

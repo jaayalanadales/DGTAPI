@@ -11,12 +11,16 @@ namespace DGTApp
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Text.Json.Serialization;
+
     public partial class Infraccion
     {
         public int Id { get; set; }
-        public string Dni { get; set; }
         public int Tipo { get; set; }
         public System.DateTime Fecha { get; set; }
+        public string ConductorDni { get; set; }
+    
+        [JsonIgnore]
+        public virtual Conductor Conductor { get; set; }
     }
 }

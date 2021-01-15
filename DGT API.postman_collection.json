@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "2e382150-ca3e-4a0f-96e2-b08e548d76ed",
+		"name": "DGT API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Añadir tipo infraccion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Descripcion\": \"Exceso de velocidad\",\r\n    \"Puntos\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44311/infracciones/tipos",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44311",
+					"path": [
+						"infracciones",
+						"tipos"
+					]
+				},
+				"description": "Añadir nuevo tipo de infracción pasando un json con la descripción y los puntos a descontar."
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir conductor habitual",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Matricula\": \"1234VTZ\",\r\n    \"Dni\": \"31010332F\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44311/vehiculos/conductores",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44311",
+					"path": [
+						"vehiculos",
+						"conductores"
+					]
+				},
+				"description": "Añadir conductor a un vehículo"
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir conductor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Dni\": \"31010332F\",\r\n    \"Nombre\": \"Jose Antonio\",\r\n    \"Apellidos\": \"Ayala Nadales\",\r\n    \"Puntos\": 9\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44311/conductores",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44311",
+					"path": [
+						"conductores"
+					]
+				},
+				"description": "Añadir un conductor mediante json"
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir vehículo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Matricula\": \"1234VTZ\",\r\n    \"Marca\": \"Ferrari\",\r\n    \"Modelo\": \"Testarossa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44311/vehiculos",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44311",
+					"path": [
+						"vehiculos"
+					]
+				},
+				"description": "Añadir vehiculo con json"
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir infraccion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Dni\" : \"31010332F\",\r\n    \"Matricula\": \"1234VTZ\",\r\n    \"Tipo\": 1,\r\n    \"Fecha\": \"2021-01-01T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44311/infracciones",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44311",
+					"path": [
+						"infracciones"
+					]
+				},
+				"description": "Añadir infraccion al conductor con el dni o al conductor del vehiculo con la matricula."
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener infracciones conductor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44311/conductores/31010332F/infracciones",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44311",
+					"path": [
+						"conductores",
+						"31010332F",
+						"infracciones"
+					]
+				},
+				"description": "Obtener lista de infracciones del conductor\r\n\r\nFormato url: conductores/{dni}/infracciones"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener 5 tipos infraccion más frecuentes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44311/infracciones",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44311",
+					"path": [
+						"infracciones"
+					]
+				},
+				"description": "Obtener los 5 tipos de infraccion más frecuentes"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener puntos conductor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44311/conductores/31010332F/puntos",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44311",
+					"path": [
+						"conductores",
+						"31010332F",
+						"puntos"
+					]
+				},
+				"description": "Obtener puntos de un conductor\r\n\r\nFormato url: conductores/{dni}/puntos"
+			},
+			"response": []
+		}
+	]
+}

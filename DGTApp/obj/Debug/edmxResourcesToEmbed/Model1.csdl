@@ -9,6 +9,10 @@
       <End Role="Conductor" EntitySet="Conductores" />
       <End Role="Vehiculo" EntitySet="Vehiculos" />
     </AssociationSet>
+    <AssociationSet Name="ConductorInfraccion" Association="Model1.ConductorInfraccion">
+      <End Role="Conductor" EntitySet="Conductores" />
+      <End Role="Infraccion" EntitySet="Infracciones" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Conductor">
     <Key>
@@ -19,6 +23,7 @@
     <Property Name="Apellidos" Type="String" Nullable="false" />
     <Property Name="Puntos" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Vehiculo" Relationship="Model1.ConductorVehiculo" FromRole="Conductor" ToRole="Vehiculo" />
+    <NavigationProperty Name="Infraccion" Relationship="Model1.ConductorInfraccion" FromRole="Conductor" ToRole="Infraccion" />
   </EntityType>
   <EntityType Name="Vehiculo">
     <Key>
@@ -42,12 +47,25 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Dni" Type="String" Nullable="false" />
     <Property Name="Tipo" Type="Int32" Nullable="false" />
     <Property Name="Fecha" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Conductor" Relationship="Model1.ConductorInfraccion" FromRole="Infraccion" ToRole="Conductor" />
+    <Property Name="ConductorDni" Type="String" Nullable="false" />
   </EntityType>
   <Association Name="ConductorVehiculo">
     <End Type="Model1.Conductor" Role="Conductor" Multiplicity="*" />
     <End Type="Model1.Vehiculo" Role="Vehiculo" Multiplicity="*" />
+  </Association>
+  <Association Name="ConductorInfraccion">
+    <End Type="Model1.Conductor" Role="Conductor" Multiplicity="1" />
+    <End Type="Model1.Infraccion" Role="Infraccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conductor">
+        <PropertyRef Name="Dni" />
+      </Principal>
+      <Dependent Role="Infraccion">
+        <PropertyRef Name="ConductorDni" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>
